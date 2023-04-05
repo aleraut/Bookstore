@@ -23,7 +23,7 @@ public class BookstoreApplication {
 	@Bean
 	public CommandLineRunner demo(BookRepository bookRepository) {
 		return (args) -> {
-			bookRepository.save(new Book("Koira", "Samuel", 2020, "44444", 4));
+			bookRepository.save(new Book("Koira", "Samuel", 2020, "44444", 4.15));
 
 			for (Book book : bookRepository.findAll()) {
 				log.info(book.toString());

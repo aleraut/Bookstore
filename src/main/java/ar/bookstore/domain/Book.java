@@ -14,7 +14,7 @@ public class Book {
     private String author;
     private int publicationYear;
     private String isbn;
-    private int price;
+    private double price;
 
 
     public Book(){
@@ -28,7 +28,7 @@ public class Book {
     }
 
     // Constructor
-    public Book(String title, String author, int publicationYear, String isbn, int price) {
+    public Book(String title, String author, int publicationYear, String isbn, double price) {
         super();
         this.title = title;
         this.author = author;
@@ -37,7 +37,7 @@ public class Book {
         this.price = price;
     }
 
-    public Book(Long id, String title, String author, int publicationYear, String isbn, int price) {
+    public Book(Long id, String title, String author, int publicationYear, String isbn, double price) {
         super();
         this.id = id;
         this.title = title;
@@ -89,11 +89,11 @@ public class Book {
         this.isbn = isbn;
     }
 
-    public int getPrice() {
+    public double getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 
