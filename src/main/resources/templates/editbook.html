@@ -30,6 +30,16 @@
     <br/>
     
     <input type="submit" value="Save" />
+
+    <div class="form-group">
+        <label for="category">Category:</label>
+        <select class="form-control" id="category" name="category">
+            <option value="">-- Select Category --</option>
+            <th:block th:each="category : ${categories}">
+                <option th:value="${category.categoryId}" th:text="${category.name}"></option>
+            </th:block>
+        </select>
+    </div>
 </form>
 
 

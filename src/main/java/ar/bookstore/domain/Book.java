@@ -4,22 +4,26 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 
 @Entity
 public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private long id;
     private String title;
     private String author;
     private int publicationYear;
     private String isbn;
     private double price;
 
+    @ManyToOne
+    private Category category;
+
 
     public Book(){
         super();
-        this.id = null;
+        this.id = 0;
         this.title = null;
         this.author = null;
         this.publicationYear = 0;
@@ -27,17 +31,7 @@ public class Book {
         this.price = 0;
     }
 
-    // Constructor
-    public Book(String title, String author, int publicationYear, String isbn, double price) {
-        super();
-        this.title = title;
-        this.author = author;
-        this.publicationYear = publicationYear;
-        this.isbn = isbn;
-        this.price = price;
-    }
-
-    public Book(Long id, String title, String author, int publicationYear, String isbn, double price) {
+    public Book(long id, String title, String author, int publicationYear, String isbn, double price, Category category) {
         super();
         this.id = id;
         this.title = title;
@@ -45,15 +39,24 @@ public class Book {
         this.publicationYear = publicationYear;
         this.isbn = isbn;
         this.price = price;
+        this.category = category;
     }
 
 
     // Getters and setters
-    public Long getId() {
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 

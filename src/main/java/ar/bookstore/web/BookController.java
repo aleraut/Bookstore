@@ -1,17 +1,15 @@
 package ar.bookstore.web;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.ModelAndView;
 
 import ar.bookstore.domain.Book;
 import ar.bookstore.domain.BookRepository;
+import ar.bookstore.domain.CategoryRepository;
 
 @Controller
 public class BookController {
@@ -19,14 +17,18 @@ public class BookController {
     @Autowired
     private BookRepository bookRepository;
 
+    @Autowired
+    private CategoryRepository categoryRepository;
 
-    @RequestMapping( value= "/booklist", method = RequestMethod.GET)
-    public ModelAndView bookList() {
-    List<Book> books = (List<Book>) bookRepository.findAll();
-    ModelAndView modelAndView = new ModelAndView("booklist");
-        modelAndView.addObject("books", books);
-        return modelAndView;
-}
+
+    @RequestMapping("/booklist")
+	public String bookList(Model model) {
+
+		model.addAttribute("books", bookRepository.findAll());
+		model.addAttribute("categories", categoryRepository.findAll());
+
+		return "booklist";
+    }
 
     @RequestMapping(value = "/delete/{bookId}", method = RequestMethod.GET)
     public String deleteBook(@PathVariable("bookId") Long bookId) {
@@ -38,6 +40,7 @@ public class BookController {
     public String addBook(Model model){
 
         model.addAttribute("book", new Book());
+        model.addAttribute("categories", categoryRepository.findAll());
         
         return "addbook";
     }
@@ -46,6 +49,7 @@ public class BookController {
     public String editBook(@PathVariable("bookId") Long bookId, Model model){
 
         model.addAttribute("book", bookRepository.findById(bookId));
+        model.addAttribute("categories", categoryRepository.findAll());
         
         return "editbook";
     }
