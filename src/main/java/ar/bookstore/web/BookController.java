@@ -34,19 +34,20 @@ public class BookController {
         return "redirect:/booklist";
 }
 
-   /* @RequestMapping(value ="/add")
+    @RequestMapping(value ="/add")
     public String addBook(Model model){
+
         model.addAttribute("book", new Book());
+        
         return "addbook";
     }
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
-
     public String saveBook(Book book) {
 
         bookRepository.save(book);
 
         return "redirect:booklist";
-    } */
+    }
 
 }
