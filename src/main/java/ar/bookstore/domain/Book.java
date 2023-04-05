@@ -9,16 +9,27 @@ import jakarta.persistence.Id;
 public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
     private String title;
     private String author;
     private int publicationYear;
     private String isbn;
-    private double price;
+    private int price;
 
 
-public Book(){}
+    public Book(){
+        super();
+        this.id = null;
+        this.title = null;
+        this.author = null;
+        this.publicationYear = 0;
+        this.isbn = null;
+        this.price = 0;
+    }
+
     // Constructor
-    public Book(String title, String author, int publicationYear, String isbn, double price) {
+    public Book(String title, String author, int publicationYear, String isbn, int price) {
+        super();
         this.title = title;
         this.author = author;
         this.publicationYear = publicationYear;
@@ -26,7 +37,26 @@ public Book(){}
         this.price = price;
     }
 
+    public Book(Long id, String title, String author, int publicationYear, String isbn, int price) {
+        super();
+        this.id = id;
+        this.title = title;
+        this.author = author;
+        this.publicationYear = publicationYear;
+        this.isbn = isbn;
+        this.price = price;
+    }
+
+
     // Getters and setters
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public String getTitle() {
         return title;
     }
@@ -59,11 +89,16 @@ public Book(){}
         this.isbn = isbn;
     }
 
-    public double getPrice() {
+    public int getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(int price) {
         this.price = price;
+    }
+
+    @Override
+    public String toString() {
+        return "Book id =" + id + " title = " + title + " author = " + author + " publicationYear = " + publicationYear + "isbn = " + isbn + " price = " + price;
     }
 }
