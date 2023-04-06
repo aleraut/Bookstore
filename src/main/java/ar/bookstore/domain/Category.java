@@ -13,21 +13,17 @@ import jakarta.persistence.OneToMany;
 public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long categoryId;
+    private Long categoryId;
     private String name;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "category")
     private List<Book> books;
 
 
-    public Category() {
-        super();
-        this.categoryId=0;
-    }
+    public Category() {}
 
-    public Category(long categoryId, String name) {
+    public Category(String name) {
         super();
-        this.categoryId = categoryId;
         this.name = name;
     }
 
@@ -40,11 +36,11 @@ public class Category {
         this.books = books;
     }
 
-    public long getCategoryId() {
+    public Long getCategoryId() {
         return categoryId;
     }
 
-    public void setCategoryId(long categoryId) {
+    public void setCategoryId(Long categoryId) {
         this.categoryId = categoryId;
     }
 
@@ -58,6 +54,6 @@ public class Category {
 
     @Override
     public String toString() {
-        return "CategoryId = " + categoryId + ", name = " + name;
+        return "Category [categoryId =" + categoryId + ", name =" + name + "]";
     }
 }

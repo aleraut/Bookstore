@@ -5,44 +5,40 @@
 <title>Edit book</title>
 </head>
 <body>
-<form th:action="@{/save}" th:object="${book}" action="#" method="post">
+    <form th:action="@{../save}" th:object="${book}" action="#" method="post">
 
-    <input type="hidden" th:field="*{id}" />
+        <input type="hidden" th:field="*{id}" />
 
-    <label for="title">Title:</label>
-    <input type="text" th:field="*{title}" id="title" />
-    <br/>
+        <label for="title">Title:</label>
+        <input type="text" th:field="*{title}" id="title" />
+        <br/>
 
-    <label for="author">Author:</label>
-    <input type="text" th:field="*{author}" id="author" />
-    <br/>
+        <label for="author">Author:</label>
+        <input type="text" th:field="*{author}" id="author" />
+        <br/>
 
-    <label for="publicationYear">Publication year:</label>
-    <input type="text" th:field="*{publicationYear}" id="publicationYear" />
-    <br/>
+        <label for="publicationYear">Publication year:</label>
+        <input type="text" th:field="*{publicationYear}" id="publicationYear" />
+        <br/>
 
-    <label for="isbn">ISBN:</label>
-    <input type="text" th:field="*{isbn}" id="isbn" />
-    <br/>
+        <label for="isbn">ISBN:</label>
+        <input type="text" th:field="*{isbn}" id="isbn" />
+        <br/>
 
-    <label for="price">Price:</label>
-    <input type="text" th:field="*{price}" id="price"/>
-    <br/>
-    
-    <input type="submit" value="Save" />
-
-    <div class="form-group">
+        <label for="price">Price:</label>
+        <input type="text" th:field="*{price}" id="price"/>
+        <br/>
+        
         <label for="category">Category:</label>
-        <select class="form-control" id="category" name="category">
-            <option value="">-- Select Category --</option>
-            <th:block th:each="category : ${categories}">
-                <option th:value="${category.categoryId}" th:text="${category.name}"></option>
-            </th:block>
+        <select class="form-control" id="category" th:field="*{category}">
+            <option th:each="category: ${categories}" th:value="${category.categoryId}" th:text="${category.name}"></option>
         </select>
-    </div>
-</form>
+        <div style="clear: both; display: block; height: 10px;"></div>
 
+        <input type="submit" class="btn btn-primary" value="Save">
 
+        </div>
+    </form>
 
 </body>
 </html>

@@ -29,12 +29,12 @@
                     <td th:text="${book.price}"></td>
                     <td th:text="${book.category.name}"></td>
                     <td>
-                        <form th:action="@{/delete/{bookId}(bookId=${book.id})}" method="get">
+                        <form th:action="@{/delete/{id}(id=${book.id})}" method="get">
                             <button type="submit" class="btn btn-danger">Delete</button>
                         </form>
                     </td>
                     <td>
-                        <form th:action="@{/edit/{bookId}(bookId=${book.id})}" method="get">
+                        <form th:action="@{/edit/{id}(id=${book.id})}" method="get">
                             <button type="submit" class="btn btn-danger">Edit</button>
                         </form>
                     </td>
