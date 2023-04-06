@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://thymeleaf.org">
+<html xmlns:th="http://thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
 <head>
     <Title>Book List</Title>
@@ -7,6 +7,15 @@
 </head>
     <body>
         <h1>Book List</h1>
+
+        <h2>Hello <span sec:authentication="name"></span></h2>
+
+        <div class="col-md-4" style="padding:20px 0">
+            <form th:action="@{/logout}" method="post">
+                <input type="submit" value="Sign Out" class="btn btn-sm btn-danger"/>
+            </form>
+        </div>
+
         <table class="table table-striped">
             <thead>
                 <tr>
@@ -16,8 +25,8 @@
                     <th>Year</th>
                     <th>Price</th>
                     <th>Category</th>
-                    <th>Delete</th>
-                    <th>Edit</th>
+                    <th sec:authorize="hasRole('ADMIN')"> </th>
+
                 </tr>
             </thead>
             <tbody>
@@ -28,16 +37,11 @@
                     <td th:text="${book.publicationYear}"></td>
                     <td th:text="${book.price}"></td>
                     <td th:text="${book.category.name}"></td>
-                    <td>
-                        <form th:action="@{/delete/{id}(id=${book.id})}" method="get">
-                            <button type="submit" class="btn btn-danger">Delete</button>
-                        </form>
-                    </td>
-                    <td>
-                        <form th:action="@{/edit/{id}(id=${book.id})}" method="get">
-                            <button type="submit" class="btn btn-danger">Edit</button>
-                        </form>
-                    </td>
+                   
+                    <td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/delete/{id}(id=${book.id})}" class="btn btn-xs btn-danger">Delete</a></td>
+                    
+		            <td> <a th:href="@{/edit/{id}(id=${book.id})}" class="btn btn-danger"  >Edit</a> </td>
+
                 </tr>
             </tbody>
         </table>
