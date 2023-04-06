@@ -5,6 +5,8 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -34,6 +36,10 @@ public class BookController {
     // Show all books
     @RequestMapping(value={"/booklist"})
 	public String bookList(Model model) {
+
+        UserDetails user = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		String username = user.getUsername();
+		System.out.println("USERNAME: " + username);
 
 		model.addAttribute("books", bookRepository.findAll());
 		model.addAttribute("categories", categoryRepository.findAll());
